@@ -1,0 +1,102 @@
+using System;
+using System.Threading;
+using System.Windows.Forms;
+
+
+namespace GeneratorPassword
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Чтобы сгенерировать пароль пропишите /generate");
+            string code = Console.ReadLine();
+            switch (code)
+            {
+                case "/generate":
+                    string[] p1 = {
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "a",
+                "A",
+                "b",
+                "B",
+                "c",
+                "C",
+                "d",
+                "D",
+                "e",
+                "E",
+                "f",
+                "F",
+                "g",
+                "G",
+                "h",
+                "H",
+                "i",
+                "I",
+                "j",
+                "J",
+                "k",
+                "K",
+                "l",
+                "L",
+                "m",
+                "M",
+                "N",
+                "n",
+                "O",
+                "o",
+                "p",
+                "P",
+                "q",
+                "Q",
+                "r",
+                "R",
+                "s",
+                "S",
+                "t",
+                "T",
+                "u",
+                "U",
+                "v",
+                "V",
+                "W",
+                "w",
+                "x",
+                "X",
+                "y",
+                "Y",
+                "z",
+                "Z",
+            };
+                    string password = "";
+                    Random rnd = new Random();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        password = password + p1[rnd.Next(0, 61)];
+                    }
+                    Console.WriteLine("Результат : " + password);
+                    Console.WriteLine("Сгенерированый пароль был скопирован в буфер обмена");
+                    Thread thread1 = new Thread(() => Clipboard.SetData(DataFormats.Text, (object)password));
+                    Thread thread = thread1;
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start();
+                    thread.Join();
+                    break;
+                default:
+                    Console.WriteLine("Наверная команда");
+                    break;
+            }
+            Console.ReadKey();
+        }
+    }
+}
